@@ -1,0 +1,31 @@
+{
+  "name": "modelling-portfolio",
+  "version": "1.0.0",
+  "description": "A modelling portfolio built with MERN stack, featuring GSAP scroll animation.",
+  "homepage": "https://github.com/gina-t/modelling-portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/gina-t/modelling-portfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gina-t/modelling-portfolio.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "server/dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/dist/server.js",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "concurrently \"npm run build:client\" \"npm run build:server\"",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "render-build": "npm install --include=dev && cd server && npm install --include=dev && cd ../client && npm install --include=dev && cd .. && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

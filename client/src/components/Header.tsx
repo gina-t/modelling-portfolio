@@ -28,7 +28,7 @@ const cards = [
 
 export default function Header() {
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const cardRef = useRef<HTMLParagraphElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (headingRef.current) {
@@ -54,7 +54,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (cardRef.current) {
+    const cardElement = cardRef.current;
+    if (cardElement) {
       document.fonts.ready.then(() => {
         if (!cardRef.current) return;
         // Get all individual cards
@@ -82,7 +83,7 @@ export default function Header() {
               duration: 0.8,
               ease: 'power2.out',
             },
-            index * 0.5 // Delay each card by 0.3 seconds
+            index * 0.5 // Delay each card by 0.5 seconds
           );
         });
 

@@ -13,6 +13,9 @@ export default function Router() {
       content: "#smooth-content",
       smooth: 2,
       effects: true,
+      ignoreMobileResize: true, // Helps with iOS
+      normalizeScroll: true, // Helps with iOS
+      smoothTouch: 0.1,
     });
 
     // General effects for images

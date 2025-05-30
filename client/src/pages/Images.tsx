@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import ImageCarousel from '../components/Carousel';
+import Footer from '../components/Footer';
 
 // Import your images
 import cygnenoir1 from '../assets/cygnenoir-1.png';
@@ -52,7 +53,7 @@ export default function Images () {
   return (
     <>
       <Header />
-      <div className="scene-wrapper">
+      <div className="scene-wrapper mt-8">
         {carouselData.map((carousel) => (
           <ImageCarousel 
             key={carousel.id} 
@@ -62,6 +63,7 @@ export default function Images () {
           />
         ))} 
       </div>
+      <Footer />
     </>
   );
 };

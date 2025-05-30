@@ -7,22 +7,32 @@ const cards = [
   {
     name: 'Philosophy',
     description:
-      'Modelling is a powerful medium for expressing identity and redefining beauty beyond conventional boundaries. Through my work, I explore diverse interpretations of self-expression that transcend traditional gender and cultural norms.',
+      'Modelling is a powerful medium for expressing identity and redefining beauty beyond conventional boundaries. Through my work, I explore diverse interpretations of the aesthetics of fashion, that transcend traditional gender and cultural norms.',
   },
   {
     name: 'Measurements',
     description:
-      'Height: 185 cm, Chest: 96 cm, Waist: 76 cm, Hips: 96 cm, Inseam: 81 cm. These measurements reflect my unique physique, which I embrace as a canvas for artistic expression.',
+      'These measurements reflect my unique physique, which I embrace as a canvas for artistic expression.',
+    measurements: [
+      { name: 'Height', value: '190 cm' },
+      { name: 'Chest', value: '96 cm' },
+      { name: 'Waist', value: '76 cm' },
+      { name: 'Hips', value: '90 cm' },
+      { name: 'Inseam', value: '85 cm' },
+      { name: 'Shoe Size', value: '10' },
+      { name: 'Hair Colour', value: 'Chestnut' },
+      { name: 'Eye Colour', value: 'Green' },
+    ],
   },
   {
     name: "Let's Work Together",
-    description: `I am always open to new opportunities and collaborations. If you are interested in working with me, please feel free to reach out.
-
-    Instagram: @jaydenhuntermodel,
-    Website: www.jaydenhuntermodel.com,
-    Email: jaydenhunter@gmail.com,
-    Phone: 0431 555 555,
-    `,
+    description:
+      'I am always open to new opportunities and collaborations. If you are interested in working with me, please feel free to reach out.',
+    contact: [
+      { name: 'Instagram', value: 'https://www.instagram.com/jayho.e' },
+      { name: 'Email', value: 'jaydenhunter@gmail.com' },
+      { name: 'Phone', value: '043188888' },
+    ],
   },
 ];
 
@@ -70,7 +80,9 @@ export default function Header() {
         });
 
         // Create timeline for sequential animation
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({
+          delay: 1.0, // Add 1.0 second delay before cards start animating  
+        });
 
         // Animate each card sequentially
         splitTexts.forEach((splitText, index) => {
@@ -83,7 +95,7 @@ export default function Header() {
               duration: 0.8,
               ease: 'power2.out',
             },
-            index * 0.5 // Delay each card by 0.5 seconds
+            index * 0.75 // Delay each card by 0.75 seconds
           );
         });
 
@@ -135,12 +147,92 @@ export default function Header() {
           {cards.map((card) => (
             <div
               key={card.name}
-              className="card-item flex gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-white/10 ring-inset"
+              className="card-item flex flex-col gap-x-4 rounded-xl bg-white/5 p-6 ring-1 ring-white/10 ring-inset"
             >
-              {/* <card.icon aria-hidden="true" className="h-7 w-5 flex-none text-indigo-400" /> */}
               <div className="text-base/7">
                 <h3 className="font-semibold text-white">{card.name}</h3>
                 <p className="mt-2 text-gray-300">{card.description}</p>
+
+                {/* table for measurements card */}
+                {card.name === 'Measurements' && card.measurements && (
+                  <div className="mt-4">
+                    <table className="min-w-full divide-y divide-gray-600">
+                      <tbody className="divide-y divide-gray-600">
+                        {card.measurements.map((measurement, index) => (
+                          <tr
+                            key={measurement.name}
+                            className={
+                              index % 2 === 0 ? 'bg-white/5' : 'bg-transparent'
+                            }
+                          >
+                            <td className="py-2 px-3 text-sm text-gray-300">
+                              {measurement.name}
+                            </td>
+                            <td className="py-2 px-3 text-sm text-gray-300">
+                              {measurement.value}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {/* table for contact card */}
+                {card.name === "Let's Work Together" && card.contact && (
+                  <div className="mt-4">
+                    <table className="min-w-full divide-y divide-gray-600">
+                      <tbody className="divide-y divide-gray-600">
+                        {card.contact.map((contact, index) => (
+                          <tr
+                            key={contact.name}
+                            className={
+                              index % 2 === 0 ? 'bg-white/5' : 'bg-transparent'
+                            }
+                          >
+                            <td className="py-2 px-3 text-sm text-gray-300 whitespace-nowrap">
+                              {contact.name}
+                            </td>
+                            <td className="py-2 px-3 text-sm text-gray-300 break-all">
+                              {contact.name === 'Instagram' ? (
+                                <a
+                                  href={contact.value}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-400 hover:underline"
+                                >
+                                  @jayho.e
+                                </a>
+                              ) : contact.name === 'Email' ? (
+                                <a
+                                  href={`mailto:${contact.value}`}
+                                  className="text-blue-400 hover:underline"
+                                >
+                                  {contact.value}
+                                </a>
+                              ) : contact.name === 'Phone' ? (
+                                <a
+                                  href={`tel:${contact.value}`}
+                                  className="text-blue-400 hover:underline"
+                                >
+                                  {contact.value}
+                                </a>
+                              ) : (
+                                <a
+                                  href={contact.value}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-400 hover:underline"
+                                >
+                                  {contact.value}
+                                </a>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </div>
           ))}
